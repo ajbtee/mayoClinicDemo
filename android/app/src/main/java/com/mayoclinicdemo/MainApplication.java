@@ -10,9 +10,6 @@ import com.facebook.react.defaults.DefaultReactNativeHost;
 import com.facebook.soloader.SoLoader;
 import java.util.List;
 
-/**
- * The main application class for the React Native application.
- */
 public class MainApplication extends Application implements ReactApplication {
     private final ReactNativeHost mReactNativeHost = new DefaultReactNativeHost(this) {
         @Override
@@ -22,12 +19,8 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
-            // Get a list of React packages used in the application.
             List<ReactPackage> packages = new PackageList(this).getPackages();
-
-            // Add the custom ApiPackage to the list of packages.
             packages.add(new ApiPackage());
-            
             return packages;
         }
 
@@ -55,11 +48,9 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
-        // Initialize SoLoader, which is used to load native libraries.
         SoLoader.init(this, /* native exopackage */ false);
 
         if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
-            // If the New Architecture is enabled, load the native entry point for the app.
             DefaultNewArchitectureEntryPoint.load();
         }
 

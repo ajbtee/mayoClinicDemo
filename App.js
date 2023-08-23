@@ -3,21 +3,12 @@ import React, { useState, useEffect } from "react";
 import HeadlineDetail from './src/components/HeadlineDetail';
 import { NativeModules } from 'react-native';
 
-/**
- * Functional component representing the main application.
- */
 const App = () => {
-
-  // Access the ApiModule from NativeModules
   const { ApiModule } = NativeModules;
-
-  // State variables to hold API data and loading state
   const [allItems, setAllItems] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Effect hook to fetch data once the component mounts
   useEffect(() => {
-    // Fetch API data using the ApiModule and the current date
     ApiModule.fetchApiData("MyMayoClinic", getCurrentDate())
       .then(jsonData => { updateItemsFromResult(jsonData) })
       .catch(error => { console.error(error) });

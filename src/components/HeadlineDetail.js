@@ -1,15 +1,7 @@
 import React, { PureComponent } from "react";
 import { View, Image, Text, StyleSheet, TouchableOpacity, Linking } from 'react-native';
 
-/**
- * Component for displaying a headline item's details.
- */
 class HeadlineDetail extends PureComponent {
-  
-  /**
-   * Handles the press event when the user taps on the headline item.
-   * Opens the URL associated with the headline.
-   */
   handlePress = () => {
     Linking.openURL(this.props.item.Url);
   };
