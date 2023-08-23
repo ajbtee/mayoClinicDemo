@@ -39,13 +39,8 @@ public class ReactNativeFlipper {
       client.addPlugin(CrashReporterPlugin.getInstance());
 
       NetworkFlipperPlugin networkFlipperPlugin = new NetworkFlipperPlugin();
-      NetworkingModule.setCustomClientBuilder(
-          new NetworkingModule.CustomClientBuilder() {
-            @Override
-            public void apply(OkHttpClient.Builder builder) {
-              builder.addNetworkInterceptor(new FlipperOkhttpInterceptor(networkFlipperPlugin));
-            }
-          });
+      NetworkingModule.setCustomClientBuilder(builder ->
+              builder.addNetworkInterceptor(new FlipperOkhttpInterceptor(networkFlipperPlugin)));
       client.addPlugin(networkFlipperPlugin);
       client.start();
 
@@ -58,13 +53,8 @@ public class ReactNativeFlipper {
               @Override
               public void onReactContextInitialized(ReactContext reactContext) {
                 reactInstanceManager.removeReactInstanceEventListener(this);
-                reactContext.runOnNativeModulesQueueThread(
-                    new Runnable() {
-                      @Override
-                      public void run() {
-                        client.addPlugin(new FrescoFlipperPlugin());
-                      }
-                    });
+                reactContext.runOnNativeModulesQueueThread(() ->
+                        client.addPlugin(new FrescoFlipperPlugin()));
               }
             });
       } else {

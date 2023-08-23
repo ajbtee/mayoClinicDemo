@@ -1,21 +1,18 @@
 package com.mayoclinicdemo;
 
 import android.app.Application;
-
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint;
 import com.facebook.react.defaults.DefaultReactNativeHost;
-import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
-
 import java.util.List;
 
-import com.mayoclinicdemo.kotlinapi.ApiPackage;
-
-
+/**
+ * The main application class for the React Native application.
+ */
 public class MainApplication extends Application implements ReactApplication {
     private final ReactNativeHost mReactNativeHost = new DefaultReactNativeHost(this) {
         @Override
@@ -25,8 +22,12 @@ public class MainApplication extends Application implements ReactApplication {
 
         @Override
         protected List<ReactPackage> getPackages() {
+            // Get a list of React packages used in the application.
             List<ReactPackage> packages = new PackageList(this).getPackages();
+
+            // Add the custom ApiPackage to the list of packages.
             packages.add(new ApiPackage());
+            
             return packages;
         }
 
@@ -54,11 +55,14 @@ public class MainApplication extends Application implements ReactApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Initialize SoLoader, which is used to load native libraries.
         SoLoader.init(this, /* native exopackage */ false);
+
         if (BuildConfig.IS_NEW_ARCHITECTURE_ENABLED) {
-            // If you opted-in for the New Architecture, we load the native entry point for this app.
+            // If the New Architecture is enabled, load the native entry point for the app.
             DefaultNewArchitectureEntryPoint.load();
         }
+
         ReactNativeFlipper.initializeFlipper(this, getReactNativeHost().getReactInstanceManager());
     }
 }

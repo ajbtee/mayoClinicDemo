@@ -1,4 +1,4 @@
-package com.mayoclinicdemo.kotlinapi
+package com.mayoclinicdemo
 
 import com.google.gson.annotations.SerializedName
 import retrofit2.http.Body
